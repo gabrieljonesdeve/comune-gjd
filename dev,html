@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GJDEV Frame</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        iframe {
+            width: 90%;
+            height: 80%;
+            border: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let intervalId;
+        let isPaused = false;
+
+        function refreshFrame() {
+            document.getElementById("gjdevFrame").src = "https://gjdev.it";
+        }
+
+        function startRefreshing() {
+            intervalId = setInterval(refreshFrame, 3000); // Ogni 3 secondi
+        }
+
+        function toggleRefresh() {
+            const button = document.getElementById("toggleButton");
+            if (isPaused) {
+                startRefreshing();
+                button.textContent = "Metti in Pausa";
+            } else {
+                clearInterval(intervalId);
+                button.textContent = "Riprendi Aggiornamento";
+            }
+            isPaused = !isPaused;
+        }
+
+        window.onload = startRefreshing; // Avvia l'aggiornamento all'avvio
+    </script>
+</head>
+<body>
+    <iframe id="gjdevFrame" src="https://gjdev.it" title="GJDEV Frame"></iframe>
+    <button id="toggleButton" onclick="toggleRefresh()">Metti in Pausa</button>
+</body>
+</html>
